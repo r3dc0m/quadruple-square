@@ -1,0 +1,35 @@
+services:
+
+  app:
+    container_name: ${APP_HOST}
+    build: .
+    restart: unless-stopped
+    ports:
+      - ${APP_PORT}:3000
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - qs-nw
+  db:
+    image: postgres:latest
+    container_name: qsdb
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:5432
+    restart: unless-stopped
+    networks:
+      - qs-nw
+    volumes:
+      - ./db/data:/var/lib/postgresql/18/docker
+
+
+networks:
+  qs-nw:
+    driver: bridge
+
+volumes:
+  node_modules:
