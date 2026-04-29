@@ -26,6 +26,15 @@ body {
             color: var(--color-A);
             text-decoration: none;
         }
+
+        .nav-center {
+            display: flex;
+            gap: var(--np);
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            text-align: center;
+        }
     }
 
     main {

@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import router from "./routes/router.js";
+import { checkDB, syncDB } from "./config/db.js";
 
 dotenv.config();
 
@@ -17,12 +18,18 @@ app.use(express.static('public'));
 app.use("/", router);
 
 app.get("/", (req, res) => {
-    res.render("layout", { 
+    res.render("layout", {
         pageTitle: "Quadruple Square",
         currentPage: "home"
     });
 });
 
-app.listen(PORT,()=>{
-    console.log(`Server up on port:${PORT}`);
-})
+async function startServer() {
+    await checkDB();
+    await syncDB();
+    app.listen(PORT, () => {
+        console.log(`Server up on port:${PORT}`);
+    });
+}
+
+startServer();
