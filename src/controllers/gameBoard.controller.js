@@ -1,17 +1,20 @@
-import GameBoard from "../models/GameBoard.model.js";
+import models from "../models/index.js";
+
+const { GameBoard } = models;
 
 const getGameBoardPositions = async (req, res) => {
     const { id } = req.params;
 
     if (!id || isNaN(id)) {
         return res.status(400).json({
-            error: "gameId must be a valid number"
+            error: `gameId must be a valid number ${id}`
         });
     }
+    const game_id = parseInt(id, 10);
 
     try {
         const positions = await GameBoard.findAll({
-            where: { game_id: parseInt(id, 10) }, //force decimal instead of word
+            where: { game_id },
             order: [["position", "ASC"]]
         });
 
@@ -28,14 +31,14 @@ const getGameBoardPositions = async (req, res) => {
         });
 
         res.status(200).json({
-            gameId,
+            game_id: id,
             board: fullBoard
         });
 
     } catch (error) {
         console.error("Error in getGameBoardPositions:", error);
         res.status(500).json({
-            error: "Error fetching game board positions"
+            error: "Error fetching game board positions."
         });
     }
 };
