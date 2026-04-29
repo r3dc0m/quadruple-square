@@ -10,11 +10,17 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.set('view engine', 'ejs');
+app.set('views', './src/views');
+app.use(express.static('public'));
 
 app.use("/", router);
 
 app.get("/", (req, res) => {
-    res.send("QS API up.");
+    res.render("layout", { 
+        pageTitle: "Quadruple Square",
+        currentPage: "home"
+    });
 });
 
 app.listen(PORT,()=>{

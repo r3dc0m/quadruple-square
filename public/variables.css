@@ -1,0 +1,30 @@
+:root {
+    --tone0: #FEF8F0;
+    --tone1: #F8EDE3;
+    --tone2: #D9C2B1;
+    --tone3: #A8937F;
+    --tone4: #5A4E47;
+    --tone5: #3A342D;
+
+    --color-A: var(--tone0);
+    --color-B: var(--tone1);
+    --color-C: var(--tone2);
+    --color-D: var(--tone3);
+    --color-E: var(--tone4);
+    --color-F: var(--tone5);
+    --opacity: 34%;
+
+    @media (prefers-color-scheme: dark) {
+        --color-A: var(--tone5);
+        --color-B: var(--tone4);
+        --color-C: var(--tone3);
+        --color-D: var(--tone2);
+        --color-E: var(--tone1);
+        --color-F: var(--tone0);
+        --opacity: 55%;
+    }
+
+    --np: 1.618rem;
+    --mp: 0.618rem;
+    --shadow: 0px 2px 5px rgb(0, 0, 0, var(--opacity));
+}
