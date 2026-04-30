@@ -1,6 +1,6 @@
 import models from "../models/index.js";
 
-const { GameBoard } = models;
+const { Game, GameBoard } = models;
 
 const getGameBoardPositions = async (req, res) => {
     const { id } = req.params;
@@ -11,6 +11,14 @@ const getGameBoardPositions = async (req, res) => {
         });
     }
     const game_id = parseInt(id, 10);
+    
+    const game = await Game.findByPk(game_id);
+
+    if (!game) {
+        return res.status(404).json({
+            error: `Game with id ${game_id} not found.`
+        });
+    }
 
     try {
         const positions = await GameBoard.findAll({
