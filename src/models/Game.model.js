@@ -8,6 +8,7 @@ export default (sequelize) => {
             game_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
+                autoIncrement: true,
                 allowNull: false
             },
             player_1: {

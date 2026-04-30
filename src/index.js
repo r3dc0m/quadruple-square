@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import router from "./routes/router.js";
 import { checkDB, syncDB } from "./config/db.js";
-import "./models/index.js";
+import models from "./models/index.js"; 
+import seedAll from "./seed/seed.js";
 
 dotenv.config();
 
@@ -25,9 +26,18 @@ app.get("/", (req, res) => {
     });
 });
 
+app.use((req) => {
+  console.log(`${new Date().toISOString()} ${req.method} ${req.originalUrl}`);
+});
+
 async function startServer() {
     await checkDB();
     await syncDB();
+
+    if (await models.User.count() === 0) {
+        await seedAll();
+    }
+
     app.listen(PORT, () => {
         console.log(`Server up on port:${PORT}`);
     });
