@@ -4,15 +4,9 @@ export default (sequelize) => {
     const PlayerCard = sequelize.define(
         "PlayerCard",
         {
-            user_id: {
+            player_id: {
                 type: DataTypes.INTEGER,
-                allowNull: true,
-                defaultValue: null 
-            },
-            bot_id: {
-                type: DataTypes.INTEGER,
-                allowNull: true,
-                defaultValue: null 
+                allowNull: false
             },
             card_id: {
                 type: DataTypes.INTEGER,

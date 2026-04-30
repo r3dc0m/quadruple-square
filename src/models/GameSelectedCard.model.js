@@ -16,6 +16,11 @@ export default (sequelize) => {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
+            is_available: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: true
+            }
         },
         {
             tableName: "game_selected_cards",

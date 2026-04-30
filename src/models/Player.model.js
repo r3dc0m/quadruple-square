@@ -1,24 +1,29 @@
 import { DataTypes } from "sequelize";
 
 export default (sequelize) => {
-    const Bot = sequelize.define(
-        "Bot",
+    const Player = sequelize.define(
+        "Player",
         {
-            bot_id: {
+            player_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false
             },
-            bot_name: {
+            player_name: {
                 type: DataTypes.STRING(89),
                 allowNull: false
             },
+            is_bot: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
+            }
         },
         {
-            tableName: "bots",
+            tableName: "players",
             timestamps: false
         }
     );
 
-    return Bot;
+    return Player;
 };

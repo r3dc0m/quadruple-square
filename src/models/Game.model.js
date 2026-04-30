@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 
+
 export default (sequelize) => {
     const Game = sequelize.define(
         "Game",
@@ -9,25 +10,36 @@ export default (sequelize) => {
                 primaryKey: true,
                 allowNull: false
             },
-            user_id: {
+            player_1: {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },
-            bot_id: {
+            player_2: {
                 type: DataTypes.INTEGER,
                 allowNull: false
+            },
+            turn: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
             },
             status: {
-                type: DataTypes.BOOLEAN,
+                type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: false
+                defaultValue: "active"
             },
+            timestamp: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: DataTypes.NOW
+            }
         },
         {
             tableName: "games",
             timestamps: false
         }
     );
+
 
     return Game;
 };
