@@ -22,7 +22,8 @@ app.use("/", router);
 app.get("/", (req, res) => {
     res.render("layout", {
         pageTitle: "Quadruple Square",
-        currentPage: "home"
+        currentPage: "home",
+        contentView: "home"
     });
 });
 

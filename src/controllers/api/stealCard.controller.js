@@ -1,5 +1,5 @@
-import stealCardService from "../services/stealCard.service.js";
-import models from "../models/index.js";
+import stealCardService from "../../services/stealCard.service.js";
+import models from "../../models/index.js";
 
 const getStealableCards = async (req, res) => {
     const { gameId } = req.params;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import GameStatusController from "../../controllers/gameStatus.controller.js";
+import GameStatusController from "../../controllers/api/gameStatus.controller.js";
 
 const GameStatusRouter = Router({ mergeParams: true });
 

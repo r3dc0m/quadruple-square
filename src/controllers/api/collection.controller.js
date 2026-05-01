@@ -1,4 +1,4 @@
-import collectionService from "../services/collection.service.js";
+import collectionService from "../../services/collection.service.js";
 
 const getCollection = async (req, res) => {
     const playerId = parseInt(req.params.id, 10);

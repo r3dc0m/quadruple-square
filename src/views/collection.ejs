@@ -1,0 +1,25 @@
+<h1>Your Collection</h1>
+
+<div class="collection">
+  <% if (collection && collection.length> 0) { %>
+    <% collection.forEach((row)=> { %>
+      <article class="card <%= row.Card?.rarity?.toLowerCase() %>">
+        <h2>
+          <%= row.Card?.card_name %>
+        </h2>
+        <p>▴ <%= row.Card?.power_up %>
+        </p>
+        <p>▸ <%= row.Card?.power_right %>
+        </p>
+        <p>▾ <%= row.Card?.power_down %>
+        </p>
+        <p>◂ <%= row.Card?.power_left %>
+        </p>
+        <p>count: <%= row.amount %>
+        </p>
+      </article>
+      <% }) %>
+        <% } else { %>
+          <p>No cards available.</p>
+          <% } %>
+</div>

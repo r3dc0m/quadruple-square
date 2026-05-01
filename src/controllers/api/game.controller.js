@@ -1,6 +1,6 @@
-import models from "../models/index.js";
-import boardService from "../services/board.service.js";
-import cardSelectionService from "../services/cardSelection.service.js";
+import models from "../../models/index.js";
+import boardService from "../../services/board.service.js";
+import cardSelectionService from "../../services/cardSelection.service.js";
 
 const { Player, Game } = models;
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import CollectionController from "../../controllers/collection.controller.js";
+import CollectionController from "../../controllers/api/collection.controller.js";
 
 const CollectionRouter = Router({ mergeParams: true });
 

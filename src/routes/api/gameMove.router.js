@@ -1,5 +1,5 @@
 import { Router } from "express";
-import GameMoveController from "../../controllers/gameMove.controller.js";
+import GameMoveController from "../../controllers/api/gameMove.controller.js";
 
 const GameMoveRouter = Router({ mergeParams: true });
 GameMoveRouter.post("/", GameMoveController.placeCard);
