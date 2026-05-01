@@ -1,6 +1,6 @@
 import models from "../models/index.js";
 import boardService from "../services/board.service.js";
-import { selectBotCards, reserveCardsForGame } from "../services/cardSelection.service.js";
+import cardSelectionService from "../services/cardSelection.service.js"; 
 
 const { Player, Game } = models;
 
@@ -64,9 +64,9 @@ const createGame = async (req, res) => {
         });
 
         // card lock
-        await reserveCardsForGame(game.game_id, playerId, playerCards);
-        const botCards = await selectBotCards(botId);
-        await reserveCardsForGame(game.game_id, botId, botCards);
+        await cardSelectionService.reserveCardsForGame(game.game_id, playerId, playerCards);
+        const botCards = await cardSelectionService.selectBotCards(botId);
+        await cardSelectionService.reserveCardsForGame(game.game_id, botId, botCards);
 
         await boardService.initializeGameBoard(game.game_id);
         const fullBoard = await boardService.getFullBoard(game.game_id);

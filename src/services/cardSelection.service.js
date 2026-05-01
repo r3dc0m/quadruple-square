@@ -1,9 +1,15 @@
-import { PlayerCard, GameSelectedCard } from "../models/index.js";
+import models from "../models/index.js";
+import sequelize from "../config/db.js";
 import { Op } from "sequelize";
+
+const { PlayerCard, GameSelectedCard } = models;
 
 const selectBotCards = async (botId, numCards = 5) => {
     const botCards = await PlayerCard.findAll({
-        where: { player_id: botId, amount: { [Op.gt]: 0 } },
+        where: { 
+            player_id: botId, 
+            amount: { [Op.lte]: 0 }
+        },
         order: sequelize.literal('RANDOM()'),
         limit: numCards
     });

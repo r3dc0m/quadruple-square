@@ -29,6 +29,10 @@ export default (sequelize) => {
                 allowNull: false,
                 defaultValue: "active"
             },
+            winner: {
+                type: DataTypes.INTEGER,
+                allowNull: true
+            },
             timestamp: {
                 type: DataTypes.DATE,
                 allowNull: false,
