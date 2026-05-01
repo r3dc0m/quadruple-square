@@ -6,8 +6,8 @@ const { PlayerCard, GameSelectedCard } = models;
 
 const selectBotCards = async (botId, numCards = 5) => {
     const botCards = await PlayerCard.findAll({
-        where: { 
-            player_id: botId, 
+        where: {
+            player_id: botId,
             amount: { [Op.lte]: 0 }
         },
         order: sequelize.literal('RANDOM()'),

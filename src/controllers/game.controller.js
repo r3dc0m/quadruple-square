@@ -1,6 +1,6 @@
 import models from "../models/index.js";
 import boardService from "../services/board.service.js";
-import cardSelectionService from "../services/cardSelection.service.js"; 
+import cardSelectionService from "../services/cardSelection.service.js";
 
 const { Player, Game } = models;
 
@@ -10,7 +10,7 @@ const createGame = async (req, res) => {
 
     const playerId = parseInt(rawId, 10);
     const botId = parseInt(rawBotId, 10);
-    
+
     if (!rawId || isNaN(playerId) || playerId <= 0) {
         return res.status(400).json({
             error: `playerId must be a valid number. Received: ${rawId}`

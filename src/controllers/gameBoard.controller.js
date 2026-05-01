@@ -11,7 +11,7 @@ const getGameBoardPositions = async (req, res) => {
         });
     }
     const game_id = parseInt(id, 10);
-    
+
     const game = await Game.findByPk(game_id);
 
     if (!game) {

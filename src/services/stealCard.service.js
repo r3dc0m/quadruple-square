@@ -13,13 +13,13 @@ const getStealableCards = async (gameId, loserId) => {
 
     return loserCards.map(row => ({
         card_id: row.card_id,
-        total_power: row.Card.power_up + row.Card.power_right + 
-                    row.Card.power_down + row.Card.power_left
+        total_power: row.Card.power_up + row.Card.power_right +
+            row.Card.power_down + row.Card.power_left
     }));
 };
 
 const botChooseBestCard = (stealableCards) => {
-    return stealableCards.reduce((best, current) => 
+    return stealableCards.reduce((best, current) =>
         current.total_power > best.total_power ? current : best
     )?.card_id || null;
 };

@@ -25,11 +25,11 @@ const getFullBoard = async (gameId) => {
         return slot
             ? slot.toJSON()
             : {
-                  game_id: gameId,
-                  card_id: null,
-                  owner_id: null,
-                  position
-              };
+                game_id: gameId,
+                card_id: null,
+                owner_id: null,
+                position
+            };
     });
 };
 

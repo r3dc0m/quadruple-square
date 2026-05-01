@@ -27,7 +27,7 @@ export default (sequelize) => {
             timestamps: false
         }
     );
-    
+
     GameSelectedCard.removeAttribute('id');
 
     return GameSelectedCard;
