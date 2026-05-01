@@ -6,6 +6,12 @@
     --tone4: #5A4E47;
     --tone5: #3A342D;
 
+    --card-s: #8B4513;
+    --card-a: #FFD700;
+    --card-b: #8B00FF;
+    --card-c: #1E90FF;
+    --card-d: #3aba3a;
+
     --color-A: var(--tone0);
     --color-B: var(--tone1);
     --color-C: var(--tone2);

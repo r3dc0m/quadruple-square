@@ -21,7 +21,10 @@ export default (sequelize) => {
             power_right: { type: DataTypes.INTEGER, allowNull: false },
             power_down: { type: DataTypes.INTEGER, allowNull: false },
             power_left: { type: DataTypes.INTEGER, allowNull: false },
-            rarity: { type: DataTypes.STRING(2), allowNull: false }
+            rarity: {
+                type: DataTypes.ENUM('S', 'A', 'B', 'C', 'D', 'F'),
+                allowNull: false
+            },
         },
         {
             tableName: "cards",

@@ -56,3 +56,9 @@ footer {
     color: var(--color-A);
     background: var(--color-D);
 }
+
+.card.s { border: 5px solid var(--card-s); }
+.card.a { border: 5px solid var(--card-a); }
+.card.b { border: 5px solid var(--card-b); }
+.card.c { border: 5px solid var(--card-c); }
+.card.d { border: 5px solid var(--card-d); }

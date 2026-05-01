@@ -1,0 +1,7 @@
+<div class="collection">
+  <% collection.forEach(card=> { %>
+    <div class="card <%= card.rarity.toLowerCase() %>">
+      <%= card.card_name %>
+    </div>
+    <% }); %>
+</div>
