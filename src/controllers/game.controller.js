@@ -6,8 +6,7 @@ const { Player, Game } = models;
 
 const createGame = async (req, res) => {
 
-    console.log("DEBUG: Full req.params:", req.params);
-    const { id } = req.params;
+    const { id, botId } = req.params;
 
     if (!id || isNaN(id)) {
         return res.status(400).json({
@@ -31,10 +30,25 @@ const createGame = async (req, res) => {
             });
         }
 
-        const bot = await Player.findOne({ where: { is_bot: true } });
+        if (!botId || isNaN(botId)) {
+            return res.status(400).json({
+                error: `botId must be a valid number. Received: ${botId}`
+            });
+        }
+
+        const botIdNum = parseInt(botId, 10);
+
+        const bot = await Player.findByPk(botIdNum);
+        
         if (!bot) {
             return res.status(404).json({
-                error: "No bot players found to start the game."
+                error: `Bot with id ${botIdNum} not found.`
+            });
+        }
+
+        if (!bot.is_bot) {
+            return res.status(400).json({
+                error: `Player with id ${botIdNum} is not a bot.`
             });
         }
 

@@ -4,7 +4,7 @@ import GameRouter from "./game.router.js";
 
 const router = Router({ mergeParams: true });
 
-router.use("/:id/newgame", GameRouter);
+router.use("/:id/:botId/newgame", GameRouter);
 router.use("/:id/positions", BoardRouter);
 
 export default router;
