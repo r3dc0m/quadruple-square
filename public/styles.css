@@ -138,7 +138,7 @@ footer {
         z-index: 0;
     }
 
-    font-weight: 700;
+    font-weight: 610;
 
     h2 {
         position: relative;
@@ -219,6 +219,22 @@ footer {
     align-items: center;
     gap: 2rem;
     padding: 2rem;
+
+    .start-btn {
+        padding: 13px;
+        background-color: var(--color-B);
+        font-weight: 610;
+        color: var(--color-F);
+        border: none;
+        border-radius: 34px;
+        font-size: 21px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .start-btn:hover {
+        background-color: var(--color-A);
+    }
 }
 
 .select-bot {
@@ -229,26 +245,18 @@ footer {
     justify-content: center;
 
     label {
-        font-weight: 600;
+        font-weight: 610;
+    }
+
+    select {
+        padding: var(--mp);
+        border: 1px solid var(--color-C);
+        border-radius: var(--mp);
+        background: var(--color-E);
+        outline: none;
+        cursor: pointer;
     }
 }
-
-.select-bot select {
-    padding: var(--mp);
-    border: 1px solid var(--color-C);
-    border-radius: var(--mp);
-    background: var(--color-E);
-    outline: none;
-    cursor: pointer;
-}
-
-.selection-top {
-    display: grid;
-    grid-template-columns: repeat(3, 144px);
-    gap: var(--mp);
-    justify-content: center;
-}
-
 
 .game-board {
     padding: 2rem;
@@ -275,6 +283,13 @@ footer {
         align-items: flex-start;
         gap: var(--np);
 
+        .selection-top {
+            display: grid;
+            grid-template-columns: repeat(3, 144px);
+            gap: var(--mp);
+            justify-content: center;
+        }
+
         .player-cards {
             display: flex;
             flex-wrap: wrap;
@@ -283,18 +298,20 @@ footer {
             align-content: center;
             gap: var(--mp);
 
-            .p1 {
+            .p1,
+            ~.selection-top .p1 {
                 border-color: #4444ff !important;
             }
 
-            .p2 {
+            .p2,
+            ~.selection-top .p2 {
                 border-color: #ff4444 !important;
             }
         }
+
+
     }
 }
-
-
 
 .game-actions {
     margin: 2rem 0;

@@ -24,15 +24,27 @@ const getStealableCards = async (req, res) => {
 
 const stealCard = async (req, res) => {
     const { gameId } = req.params;
-    const { cardId } = req.body;
     const playerId = parseInt(req.params.id, 10);
+    const { cardId } = req.body;
 
     try {
-        await stealCardService.stealCard(gameId, playerId, cardId);
         const game = await models.Game.findByPk(gameId);
-        await game.update({ status: 'finished' });
+        if (!game || game.status !== 'waiting_steal') {
+            throw new Error("No steal available");
+        }
 
-        res.json({ success: true, message: 'Card stolen!' });
+        const winnerId = (game.winner === playerId) ? playerId : game.player_2;
+
+        let finalCardId = cardId;
+
+        if (game.winner === game.player_2) {
+            const stealable = await stealCardService.getStealableCards(gameId, game.player_1);
+            finalCardId = stealCardService.botChooseBestCard(stealable);
+        }
+
+        await stealCardService.executeStealTransaction(gameId, winnerId, finalCardId);
+
+        res.json({ success: true, message: 'Game has ended' });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

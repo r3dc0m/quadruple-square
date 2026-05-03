@@ -54,7 +54,6 @@ const getPlayerCollection = async (playerId) => {
 };
 
 const addCard = async (playerId, cardId) => {
-    console.log(`gameSelection.service.addCard(${playerId}, ${cardId})`);
     return sequelize.transaction(async (t) => {
 
         let draftGame = await Game.findOne({
@@ -133,7 +132,6 @@ const removeCard = async (playerId, cardId) => {
 };
 
 const resetSelection = async (playerId) => {
-    console.log(`gameSelection.service.resetSelection(${playerId}, ${cardId})`);
     return sequelize.transaction(async (t) => {
         const draftGame = await Game.findOne(
             {
@@ -197,20 +195,16 @@ const reservePlayerCards = async (gameId, playerId, cardIds) => {
 };
 
 const selectBotCards = async (botId, numCards = 5) => {
-    console.log("*** selectBotCards from gameSelection.service.js ***");
-    console.log(`*** selectBotCards ${botId} ${numCards} ***`);
     const botCards = await PlayerCard.findAll({
         where: { player_id: botId },
         order: sequelize.literal("RANDOM()"),
         limit: numCards,
         include: [Card]
     });
-    console.log(`*** selectBotCards ${botCards.map(c => c.card_id)} ***`);
     return botCards.map((pc) => pc.card_id);
 };
 
 const reserveBotCards = async (gameId, botId, botCards) => {
-    console.log("*** bot cards reserved from gameSelection.service.js !!! ***");
     for (const cardId of botCards) {
         await GameSelectedCard.create({
             game_id: gameId,

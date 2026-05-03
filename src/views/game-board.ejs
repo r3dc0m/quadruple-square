@@ -1,56 +1,32 @@
-<div class="game-board">
-  <h1>Game <%= gameId %> - <%= game.status %></h1>
-
+<div class="game-board" id="gameContainer">
   <div class="game-header">
-    <div class="score">
-      <span><%= game.Player1.player_name %> 0 - 0 <%= game.Player2.player_name %></span>
-    </div>
-    <div class="turn">
-        <span>
-        Turn: <%= game.turn === 0 ? 'Player1' : game.Player2.player_name %>
-        </span>
-    </div>
+    <div class="score" id="score">-- vs --</div>
+    <div class="turn" id="turnIndicator">Loading...</div>
   </div>
 
   <div class="board-display">
-    <div class="player-cards p1">
-      <% player1Hand.forEach(row => { %>
-        <% if (row && row.Card) { %>
-          <div class="card <%= row.Card.rarity.toLowerCase() %> p1">
-            <%- include('card', { row: row, showAmount: false }) %>
-          </div>
-        <% } %>
-      <% }) %>
+    <div class="player-cards p1" id="player1Hand">
     </div>
-
-<div class="selection-top">
-  <% for (let i = 0; i < 9; i++) { %>
-    <% const card = board.find(c => c.position === i) || null; %>
-    <% if (card && card.Card) { %>
-      <% const playerClass = card.owner_id === game.player_1 ? 'p1' : 'p2'; %>
-      <div class="card <%= card.Card.rarity.toLowerCase() %> <%= playerClass %>">
-        <%- include('card', { row: card, showAmount: false }) %>
-      </div>
-    <% } else { %>
-      <article class="card empty-slot">
-        <div class="empty-shadow"></div>
-      </article>
-    <% } %>
-  <% } %>
-</div>
-
-<div class="player-cards p2">
-  <% player2Hand.forEach(row => { %>
-    <% if (row && row.Card) { %>
-      <div class="card <%= row.Card.rarity.toLowerCase() %> p2">
-        <%- include('card', { row: row, showAmount: false }) %>
-      </div>
-    <% } %>
-  <% }) %>
-</div>
+    
+    <div class="selection-top" id="gameBoard">
+    </div>
+    
+    <div class="player-cards p2" id="player2Hand">
+    </div>
   </div>
 
   <div class="game-actions">
-    <a href="/players/<%= playerId %>/newgame">Game menu</a>
+    <a href="/players/<%= playerId %>/newgame" id="gameMenuLink">Game menu</a>
+  </div>
+
+  <div class="steal-phase" id="stealContainer" style="display: none;">
+    <h2>You've won! Please pick up a card:</h2>
+    <div class="collection" id="stealableList"></div>
   </div>
 </div>
+
+<script src="/js/game-client.js"></script>
+<script>
+  window.gameApp = new GameClient(<%= playerId %>, <%= gameId %>);
+  window.gameApp.init();
+</script>

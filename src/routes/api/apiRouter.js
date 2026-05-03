@@ -13,8 +13,9 @@ router.use("/:id/positions", BoardRouter);
 router.use("/:id/game", GameRouter);
 router.use("/:id/game-selection", GameSelectionRouter);
 router.use("/:id/collection", CollectionRouter);
-router.use("/:gameId/move", GameMoveRouter);
-router.use("/:gameId/steal", StealCardRouter);
+router.use("/:id/:gameId/move", GameMoveRouter);
+router.use("/:id/:gameId/steal", StealCardRouter);
+router.use("/:id/:gameId/status", GameStatusRouter);
 router.use("/:gameId/status", GameStatusRouter);
 
 export default router;

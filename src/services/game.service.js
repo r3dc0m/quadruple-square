@@ -8,7 +8,7 @@ const { Game, Player } = models;
 const getActiveGameByPlayer = async (playerId) => {
     return await Game.findOne({
         where: {
-            status: "active",
+            status: ["active", "waiting_steal"],
             [Op.or]: [
                 { player_1: playerId },
                 { player_2: playerId }

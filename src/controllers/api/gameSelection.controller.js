@@ -22,7 +22,6 @@ const getSelection = async (req, res) => {
 };
 
 const addCard = async (req, res) => {
-     console.log(`addCard player=${req.params.id}, cardId=${req.body.cardId}`); 
     const playerId = parseInt(req.params.id, 10);
     const cardId = parseInt(req.body.cardId, 10);
 
@@ -40,7 +39,6 @@ const addCard = async (req, res) => {
 };
 
 const removeCard = async (req, res) => {
-    console.log(`removeCard player=${req.params.id}, cardId=${req.body.cardId}`); 
     const playerId = parseInt(req.params.id, 10);
     const cardId = parseInt(req.body.cardId, 10);
 

@@ -1,5 +1,4 @@
 import db from "../config/db.js";
-
 import UserModel from "./User.model.js";
 import PlayerModel from "./Player.model.js";
 import CardModel from "./Card.model.js";
@@ -49,7 +48,6 @@ models.Player.hasMany(models.GameSelectedCard, {
     foreignKey: "player_id",
 });
 
-
 models.PlayerCard.belongsTo(models.Player, { foreignKey: "player_id" });
 models.Player.hasMany(models.PlayerCard, { foreignKey: "player_id" });
 
@@ -69,3 +67,4 @@ models.Card.hasMany(models.GameBoard, {
 });
 
 export default models;
+export { db as sequelize };

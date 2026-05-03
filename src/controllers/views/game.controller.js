@@ -62,11 +62,11 @@ const getGamePage = async (req, res) => {
 
         const board = await boardService.getFullBoard(gameId);
         const player1Hand = await GameSelectedCard.findAll({
-            where: { game_id: gameId, player_id: playerId },
+            where: { game_id: gameId, player_id: playerId, is_available: true },
             include: [Card]
         });
         const player2Hand = await GameSelectedCard.findAll({
-            where: { game_id: gameId, player_id: game.player_2 },
+            where: { game_id: gameId, player_id: game.player_2, is_available: true },
             include: [Card]
         });
         const endState = await gameMoveService.checkGameEnd(gameId);

@@ -19,7 +19,7 @@
                 <% for (let i=0; i < 5; i++) { %>
                     <% const row=selectedCards[i] || null; %>
                         <% if (row) { %>
-                            <button type="submit" class="card <%= row.Card.rarity.toLowerCase() %> selectable" formaction="/players/<%= playerId %>/game-selection/remove/<%= row.Card.card_id %>">
+                            <button type="submit" class="card <%= row.Card.rarity.toLowerCase() %> selectable" formaction="/players/<%= playerId %>/game-selection/remove/<%= row.Card.card_id %>"  formnovalidate>
                                 <%- include('card', { row: row, showAmount: false }) %>
                             </button>
                         <% } else { %>
@@ -32,8 +32,7 @@
 
             <%- include('collection', { collection: collectionCards, playerId: playerId, selectable: true }) %>
 
-            <button type="submit" <%=selectedCards.filter(c=> c).length !== 5 ? 'disabled' : '' %>
-                >
+            <button type="submit" <%=selectedCards.filter(c=> c).length !== 5 ? 'disabled' : '' %> class="start-btn" >
                 Start Game (<%= selectedCards.filter(c=> c).length %>/5)
             </button>
             
