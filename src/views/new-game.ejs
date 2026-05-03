@@ -1,0 +1,47 @@
+<div class="new-game">
+    <h1>New Game</h1>
+
+    <% if (!activeGame) { %>
+        <form action="/players/<%= playerId %>/commitgame" method="POST">
+
+            <div class="select-bot">
+                <label for="botId">Bot:</label>
+                <select name="botId" id="botId" required>
+                    <% bots.forEach(bot=> { %>
+                        <option value="<%= bot.player_id %>">
+                            <%= bot.player_name %>
+                        </option>
+                        <% }) %>
+                </select>
+            </div>
+
+            <section class="collection">
+                <% for (let i=0; i < 5; i++) { %>
+                    <% const row=selectedCards[i] || null; %>
+                        <% if (row) { %>
+                            <button type="submit" class="card <%= row.Card.rarity.toLowerCase() %> selectable" formaction="/players/<%= playerId %>/game-selection/remove/<%= row.Card.card_id %>">
+                                <%- include('card', { row: row, showAmount: false }) %>
+                            </button>
+                        <% } else { %>
+                            <article class="card empty-slot">
+                                <div class="empty-shadow"></div>
+                            </article>
+                        <% } %>
+                    <% } %>
+            </section>
+
+            <%- include('collection', { collection: collectionCards, playerId: playerId, selectable: true }) %>
+
+            <button type="submit" <%=selectedCards.filter(c=> c).length !== 5 ? 'disabled' : '' %>
+                >
+                Start Game (<%= selectedCards.filter(c=> c).length %>/5)
+            </button>
+            
+        </form>
+        <% } else { %>
+            <div class="game-controls">
+                <a href="/players/<%= playerId %>/game/<%= activeGame.game_id %>">Continue</a>
+                <a href="/players/<%= playerId %>/game/<%= activeGame.game_id %>/cancel">Cancel game</a>
+            </div>
+            <% } %>
+</div>

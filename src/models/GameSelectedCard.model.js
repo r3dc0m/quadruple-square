@@ -28,7 +28,7 @@ export default (sequelize) => {
         }
     );
 
-    GameSelectedCard.removeAttribute('id');
+    // GameSelectedCard.removeAttribute('id');
 
     return GameSelectedCard;
 };

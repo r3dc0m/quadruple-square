@@ -1,0 +1,30 @@
+<%
+  const isCard = row && row.Card && row.amount !== undefined;
+  // const isCard = row && row.Card; //no name if no amount
+  const isEmpty = !row || !row.Card;
+  const name = isCard ? row.Card.card_name : "";
+  const image = isCard ? `/img/${row.Card.image_path.split('/').pop()}` : "";
+%>
+
+<% if (isEmpty) { %>
+  <div class="card empty-slot">
+    <div class="empty-shadow"></div>
+  </div>
+<% } else { %>
+    <img src="<%= image %>" alt="<%= name %>" onerror="this.onerror=null;this.src='/img/duckfault.jpg';">
+
+    <div class="power">
+      <span class="power-up"><%= row.Card.power_up %></span>
+      <span class="power-right"><%= row.Card.power_right %></span>
+      <span class="power-down"><%= row.Card.power_down %></span>
+      <span class="power-left"><%= row.Card.power_left %></span>
+    </div>
+
+    <div class="card-info">
+        <h2><%= name %></h2>
+      <% if (locals.showAmount) { %>
+        <span class="amount"><%= row.amount %></span>
+      <% } %>
+    </div>
+
+<% } %>

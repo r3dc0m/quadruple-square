@@ -56,4 +56,16 @@ models.Player.hasMany(models.PlayerCard, { foreignKey: "player_id" });
 models.PlayerCard.belongsTo(models.Card, { foreignKey: "card_id" });
 models.Card.hasMany(models.PlayerCard, { foreignKey: "card_id" });
 
+models.GameSelectedCard.belongsTo(models.Card, { foreignKey: "card_id" });
+models.Card.hasMany(models.GameSelectedCard, { foreignKey: "card_id" });
+
+models.GameBoard.belongsTo(models.Card, {
+    foreignKey: "card_id",
+    as: "Card"
+});
+
+models.Card.hasMany(models.GameBoard, {
+    foreignKey: "card_id"
+});
+
 export default models;

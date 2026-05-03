@@ -22,7 +22,7 @@ export default (sequelize) => {
             power_down: { type: DataTypes.INTEGER, allowNull: false },
             power_left: { type: DataTypes.INTEGER, allowNull: false },
             rarity: {
-                type: DataTypes.ENUM('S', 'A', 'B', 'C', 'D', 'F'),
+                type: DataTypes.ENUM('S', 'A', 'B', 'C', 'D'),
                 allowNull: false
             },
         },

@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import router from "./routes/router.js";
 import { checkDB, syncDB } from "./config/db.js";
-import models from "./models/index.js"; 
+import models from "./models/index.js";
 import seedAll from "./seed/seed.js";
 
 dotenv.config();
@@ -27,8 +27,19 @@ app.get("/", (req, res) => {
     });
 });
 
-app.use((req) => {
-  console.log(`${new Date().toISOString()} ${req.method} ${req.originalUrl}`);
+app.use((req, res, next) => {
+    console.log("*************** INDEX MW **************")
+    console.log(`${new Date().toISOString()} ${req.method} ${req.originalUrl}`);
+
+    next();
+});
+
+app.use((req, res) => {
+    res.status(404).render("layout", {
+        pageTitle: "404",
+        currentPage: "404",
+        contentView: "home"
+    });
 });
 
 async function startServer() {

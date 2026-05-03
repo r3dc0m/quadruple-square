@@ -1,9 +1,9 @@
 <nav class="navbar">
-    <div class="nav-left"><a href="/">Home</a></div>
+    <div class="nav-left"><a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>">Home</a></div>
     <div class="nav-center">
-        <a href="/">Admin Panel</a>
-        <a href="/">New Game</a>
-        <a href="/players/1/collection">Collection</a>
+        <a href="/" class="<%= currentPage === 'admin' ? 'active' : '' %>">Admin Panel</a>
+        <a href="/players/1/newgame" class="<%= currentPage === 'newgame' ? 'active' : '' %>">New Game</a>
+        <a href="/players/1/collection" class="<%= currentPage === 'collection' ? 'active' : '' %>">Collection</a>
     </div>
     <div class="nav-right"><a href="/">User</a></div>
 </nav>

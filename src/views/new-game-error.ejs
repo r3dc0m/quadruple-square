@@ -1,0 +1,21 @@
+<div class="error-page">
+    <h1>New Game Error</h1>
+    <p><strong>Player ID:</strong>
+        <%= playerId %>
+    </p>
+    <p><strong>Error:</strong>
+        <%= error %>
+    </p>
+
+    <% if (typeof stack !=='undefined' && stack) { %>
+        <details>
+            <summary>Debug Stack (development)</summary>
+            <pre><%= stack %></pre>
+        </details>
+        <% } %>
+
+            <div style="margin-top:2rem;">
+                <a href="/players/<%= playerId %>/newgame" style="margin-right:1rem;">Retry</a>
+                <a href="/players/<%= playerId %>/collection">Collection</a>
+            </div>
+</div>
