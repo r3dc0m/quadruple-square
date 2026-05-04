@@ -4,6 +4,7 @@ import router from "./routes/router.js";
 import { checkDB, syncDB } from "./config/db.js";
 import models from "./models/index.js";
 import seedAll from "./seed/seed.js";
+import session from 'express-session';
 
 dotenv.config();
 
@@ -13,11 +14,29 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'yoursecretisnotsafe',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 86400000,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax'
+    }
+}));
+
+app.use((req, res, next) => {
+    res.locals.currentPage = req.query.page || 'home';
+    res.locals.session = req.session || {};
+    next();
+});
+
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
 app.use(express.static('public'));
 
-app.use("/", router);
+app.use('/', router);
 
 app.get("/", (req, res) => {
     res.render("layout", {

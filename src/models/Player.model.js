@@ -7,6 +7,7 @@ export default (sequelize) => {
             player_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
+                autoIncrement: true,
                 allowNull: false
             },
             player_name: {

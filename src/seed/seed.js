@@ -1,11 +1,12 @@
 import models from "../models/index.js";
 import db from "../config/db.js";
+import bcrypt from 'bcryptjs';
 
 const ADMIN_CONFIG = {
     user_id: 1,
     user_name: process.env.ADMIN_USERNAME || 'admin',
     user_email: process.env.ADMIN_EMAIL || 'admin@quadruple-square.com',
-    user_password: process.env.ADMIN_PASSWORD || 'admin123',
+    user_password: await bcrypt.hash(process.env.ADMIN_PASSWORD || 'admin123', 10),
     user_currency: parseInt(process.env.ADMIN_CURRENCY) || 4181,
     when_created: new Date(),
     is_admin: true
@@ -18,7 +19,7 @@ const seedAll = async () => {
 
     await Player.bulkCreate([
         { player_id: 1, player_name: 'Nimda Eno', is_bot: false },
-        { player_id: 1001, player_name: 'Resu Aton', is_bot: true }
+        { player_id: 2, player_name: 'Resu Aton', is_bot: true }
     ], { ignoreDuplicates: true });
 
     await User.bulkCreate([
@@ -150,18 +151,19 @@ const seedAll = async () => {
         { player_id: 1, card_id: 5, amount: 5 },
         { player_id: 1, card_id: 8, amount: 13 },
         { player_id: 1, card_id: 102, amount: 1 },
-        { player_id: 21, card_id: 1, amount: 1 },
-        { player_id: 21, card_id: 6, amount: 1 },
-        { player_id: 21, card_id: 7, amount: 1 },
-        { player_id: 21, card_id: 8, amount: 1 },
-        { player_id: 21, card_id: 9, amount: 1 },
-        { player_id: 21, card_id: 55, amount: 1 }
+        { player_id: 2, card_id: 1, amount: 1 },
+        { player_id: 2, card_id: 6, amount: 1 },
+        { player_id: 2, card_id: 7, amount: 1 },
+        { player_id: 2, card_id: 8, amount: 1 },
+        { player_id: 2, card_id: 9, amount: 1 },
+        { player_id: 2, card_id: 55, amount: 1 }
     ], { ignoreDuplicates: true });
 
     //flush PK maxval in pg so ORM doesn't glitch when creating new records...
     await db.query(`SELECT setval(pg_get_serial_sequence('games', 'game_id'), COALESCE((SELECT MAX(game_id) FROM games), 1))`);
     await db.query(`SELECT setval(pg_get_serial_sequence('users', 'user_id'), COALESCE((SELECT MAX(user_id) FROM users), 1))`);
     await db.query(`SELECT setval(pg_get_serial_sequence('cards', 'card_id'), COALESCE((SELECT MAX(card_id) FROM cards), 1))`);
+    await db.query(`SELECT setval(pg_get_serial_sequence('players', 'player_id'), COALESCE((SELECT MAX(player_id) FROM players), 1))`);
 
     console.log("All seed data inserted successfully!");
 };

@@ -1,9 +1,25 @@
 <nav class="navbar">
-    <div class="nav-left"><a href="/" class="<%= currentPage === 'home' ? 'active' : '' %>">Home</a></div>
-    <div class="nav-center">
-        <a href="/" class="<%= currentPage === 'admin' ? 'active' : '' %>">Admin Panel</a>
-        <a href="/players/1/newgame" class="<%= currentPage === 'newgame' ? 'active' : '' %>">New Game</a>
-        <a href="/players/1/collection" class="<%= currentPage === 'collection' ? 'active' : '' %>">Collection</a>
+    <div class="nav-left">
+        <a href="/" class="<%= currentPage === 'home' || !currentPage ? 'active' : '' %>">Home</a>
     </div>
-    <div class="nav-right"><a href="/">User</a></div>
+    <div class="nav-center">
+        <% if (typeof session !=='undefined' && session?.is_admin) { %>
+            <a href="/admin" class="<%= currentPage === 'admin' ? 'active' : '' %>">Admin Panel</a>
+            <% } %>
+                <% if (typeof session !=='undefined' && session?.userId) { %>
+                    <a href="/players/<%= session.userId %>/newgame">New Game</a>
+                    <a href="/players/<%= session.userId %>/collection">Collection</a>
+                    <% } %>
+    </div>
+    <div class="nav-right">
+        <% if (typeof session !=='undefined' && session?.userId) { %>
+            <form method="POST" action="/auth/logout" style="display:inline-block;">
+                <button type="submit">
+                    Logout (<%= session.email %>)
+                </button>
+            </form>
+            <% } else { %>
+                <a href="/login">Login</a>
+                <% } %>
+    </div>
 </nav>
