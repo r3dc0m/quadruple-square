@@ -313,6 +313,12 @@ footer {
     }
 }
 
+.card-assign {
+    img {
+        width: 34px;
+    }
+}
+
 .game-actions {
     margin: 2rem 0;
 }

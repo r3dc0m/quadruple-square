@@ -1,0 +1,65 @@
+<h1>Admin Panel</h1>
+
+
+<section>
+    <h2>Bots</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Player ID</th>
+                <th>Bot name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% bots.forEach(bot=> { %>
+                <tr>
+                    <td>
+                        <%= bot.player_id %>
+                    </td>
+                    <td>
+                        <%= bot.player_name %>
+                    </td>
+                    <td><a href="/admin/assign-cards/<%= bot.player_id %>">Assign cards</a></td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</section>
+
+
+<section>
+    <h2>Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Player ID</th>
+                <th>Player name</th>
+                <th>Email</th>
+                <th>Is admin</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user=> { %>
+                <tr>
+                    <td>
+                        <%= user.user_id %>
+                    </td>
+                    <td>
+                        <%= user.user_name %>
+                    </td>
+                    <td>
+                        <%= user.user_email %>
+                    </td>
+                    <td>
+                        <%= user.is_admin ? "Yes" : "No" %>
+                    </td>
+                    <td>
+                        <a href="/admin/assign-cards/<%= user.user_id %>">Assign cards</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+</section>

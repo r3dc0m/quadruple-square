@@ -5,8 +5,8 @@ import { requireAdmin } from '../middleware/admin.js';
 const router = Router();
 router.use(requireAdmin);
 
-router.get('/stats', AdminController.stats);
-router.get('/users', AdminController.listUsers);
-router.put('/users/:id', AdminController.updateUser);
+router.get('/', AdminController.adminPanel);
+router.post('/assign-cards/', AdminController.assignCards);
+router.get('/assign-cards/:playerId', AdminController.assignCardsForm);
 
 export default router;

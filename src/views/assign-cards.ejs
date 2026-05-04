@@ -1,0 +1,26 @@
+<h1>Assign cards to player <%= playerId %></h1>
+
+<form method="POST" action="/admin/assign-cards/" novalidate>
+  <input type="hidden" name="playerId" value="<%= playerId %>" />
+
+  <% if (collection && collection.length > 0) { %>
+    <% collection.forEach(row => { %>
+      <div class="card-assign">
+        <img src="/img/<%= row.Card.image_path.split('/').pop() %>" alt="<%= row.Card.card_name %>" onerror="this.onerror=null;this.src='/img/duckfault.jpg';" />
+        <span><%= row.Card.card_name %></span>
+        <input
+          type="number"
+          name="<%= row.card_id %>"
+          min="0"
+          value="<%= row.amount || 0 %>"
+          placeholder="0"
+        />
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No cards in the collection.</p>
+  <% } %>
+
+  <button type="submit">Save</button>
+  <a href="/admin">Cancel</a>
+</form>
