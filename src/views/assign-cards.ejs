@@ -1,13 +1,17 @@
 <h1>Assign cards to player <%= playerId %></h1>
 
+
 <form method="POST" action="/admin/assign-cards/" novalidate>
   <input type="hidden" name="playerId" value="<%= playerId %>" />
+
 
   <% if (collection && collection.length > 0) { %>
     <% collection.forEach(row => { %>
       <div class="card-assign">
-        <img src="/img/<%= row.Card.image_path.split('/').pop() %>" alt="<%= row.Card.card_name %>" onerror="this.onerror=null;this.src='/img/duckfault.jpg';" />
-        <span><%= row.Card.card_name %></span>
+        <img src="/img/<%= row.card.image_path.split('/').pop() %>"
+             alt="<%= row.card.card_name %>"
+             onerror="this.onerror=null;this.src='/img/duckfault.jpg';" />
+        <span><%= row.card.card_name %></span>
         <input
           type="number"
           name="<%= row.card_id %>"

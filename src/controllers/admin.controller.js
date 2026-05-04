@@ -1,5 +1,4 @@
 import models from "../models/index.js";
-import collectionService from '../services/collection.service.js';
 
 const { Player, PlayerCard } = models;
 
@@ -39,9 +38,28 @@ const assignCardsForm = async (req, res) => {
     });
   }
 
-  const collection = await collectionService.getPlayerCollection(playerId);
+  const allCards = await models.Card.findAll({
+    order: [["card_id", "ASC"]]
+  });
 
-  collection.sort((a, b) => a.card_id - b.card_id);
+  const playerCards = await PlayerCard.findAll({
+    where: { player_id: playerId },
+    include: [models.Card]
+  });
+
+  const amountMap = {};
+  for (const pc of playerCards) {
+    amountMap[pc.card_id] = pc.amount;
+  }
+
+  const collection = allCards.map(card => {
+    const amount = amountMap[card.card_id] || 0;
+    return {
+      card_id: card.card_id,
+      card: card,
+      amount
+    };
+  });
 
   res.render('layout', {
     pageTitle: `Assign cards to ${player.player_name}`,
@@ -88,8 +106,29 @@ const assignCards = async (req, res) => {
 };
 
 
+const createBot = async (req, res) => {
+  const { player_name } = req.body;
+
+  const name = player_name || `Bot_${Date.now() % 10000}`;
+
+  try {
+    const bot = await Player.create({
+      player_name: name,
+      is_bot: true
+    });
+
+    console.log('New bot created:', bot.toJSON());
+
+    return res.redirect('/admin');
+  } catch (error) {
+    console.error('Error creating bot:', error);
+    return res.status(500).send('Error creating bot');
+  }
+};
+
 export default {
   assignCards,
   assignCardsForm,
-  adminPanel
+  adminPanel,
+  createBot
 }

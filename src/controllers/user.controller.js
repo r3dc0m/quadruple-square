@@ -1,3 +1,5 @@
+import models from "../models/index.js";
+
 const profile = async (req, res) => {
   const user = await models.User.findByPk(req.user.userId, {
     include: [models.Player]

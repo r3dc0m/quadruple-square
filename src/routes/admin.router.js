@@ -8,5 +8,6 @@ router.use(requireAdmin);
 router.get('/', AdminController.adminPanel);
 router.post('/assign-cards/', AdminController.assignCards);
 router.get('/assign-cards/:playerId', AdminController.assignCardsForm);
+router.post('/createbot', AdminController.createBot);
 
 export default router;
