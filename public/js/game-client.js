@@ -80,19 +80,21 @@ class GameClient {
   }
 
   renderCard(card) {
+    const displayPower = (power) => power === 10 ? 'A' : power;
+
     return `
-      <img src="/img/${card.image_path.split('/').pop()}" alt="${card.card_name}" 
-           onerror="this.src='/img/duckfault.jpg'">
-      <div class="power">
-        <span class="power-up">${card.power_up}</span>
-        <span class="power-right">${card.power_right}</span>
-        <span class="power-down">${card.power_down}</span>
-        <span class="power-left">${card.power_left}</span>
-      </div>
-      <div class="card-info">
-        <h2>${card.card_name}</h2>
-      </div>
-    `;
+    <img src="/img/${card.image_path.split('/').pop()}" alt="${card.card_name}" 
+         onerror="this.src='/img/duckfault.jpg'">
+    <div class="power">
+      <span class="power-up">${displayPower(card.power_up)}</span>
+      <span class="power-right">${displayPower(card.power_right)}</span>
+      <span class="power-down">${displayPower(card.power_down)}</span>
+      <span class="power-left">${displayPower(card.power_left)}</span>
+    </div>
+    <div class="card-info">
+      <h2>${card.card_name}</h2>
+    </div>
+  `;
   }
 
   updateUI() {

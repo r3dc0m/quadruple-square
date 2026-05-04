@@ -4,6 +4,11 @@
     <div class="turn" id="turnIndicator">Loading...</div>
   </div>
 
+    <div class="steal-phase" id="stealContainer" style="display: none;">
+    <h2>You've won! Please pick up a card:</h2>
+    <div class="collection" id="stealableList"></div>
+  </div>
+
   <div class="board-display">
     <div class="player-cards p1" id="player1Hand">
     </div>
@@ -19,10 +24,7 @@
     <a href="/players/<%= playerId %>/newgame" id="gameMenuLink">Game menu</a>
   </div>
 
-  <div class="steal-phase" id="stealContainer" style="display: none;">
-    <h2>You've won! Please pick up a card:</h2>
-    <div class="collection" id="stealableList"></div>
-  </div>
+
 </div>
 
 <script src="/js/game-client.js"></script>

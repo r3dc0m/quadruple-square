@@ -14,10 +14,10 @@
     <img src="<%= image %>" alt="<%= name %>" onerror="this.onerror=null;this.src='/img/duckfault.jpg';">
 
     <div class="power">
-      <span class="power-up"><%= row.Card.power_up %></span>
-      <span class="power-right"><%= row.Card.power_right %></span>
-      <span class="power-down"><%= row.Card.power_down %></span>
-      <span class="power-left"><%= row.Card.power_left %></span>
+      <span class="power-up"><%= row.Card.power_up === 10 ? 'A' : row.Card.power_up %></span>
+      <span class="power-right"><%= row.Card.power_right === 10 ? 'A' : row.Card.power_right %></span>
+      <span class="power-down"><%= row.Card.power_down === 10 ? 'A' : row.Card.power_down %></span>
+      <span class="power-left"><%= row.Card.power_left === 10 ? 'A' : row.Card.power_left %></span>
     </div>
 
     <div class="card-info">
