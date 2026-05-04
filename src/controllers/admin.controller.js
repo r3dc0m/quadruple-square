@@ -1,5 +1,4 @@
 import models from "../models/index.js";
-
 const { Player, PlayerCard } = models;
 
 const adminPanel = async (req, res) => {
@@ -105,7 +104,6 @@ const assignCards = async (req, res) => {
   }
 };
 
-
 const createBot = async (req, res) => {
   const { player_name } = req.body;
 
@@ -117,8 +115,6 @@ const createBot = async (req, res) => {
       is_bot: true
     });
 
-    console.log('New bot created:', bot.toJSON());
-
     return res.redirect('/admin');
   } catch (error) {
     console.error('Error creating bot:', error);
@@ -126,9 +122,39 @@ const createBot = async (req, res) => {
   }
 };
 
+const deleteBot = async (req, res) => {
+  const playerIdStr = req.params.playerId;
+  const playerId = parseInt(playerIdStr, 10);
+
+  if (isNaN(playerId) || playerId <= 0) {
+    return res.status(400).send('Invalid bot ID');
+  }
+
+  try {
+    const bot = await Player.findOne({
+      where: { player_id: playerId, is_bot: true }
+    });
+
+    if (!bot) {
+      console.log('Bot not found:', playerId);
+      return res.status(404).send('Bot not found');
+    }
+
+    await PlayerCard.destroy({ where: { player_id: playerId } });
+    await bot.destroy();
+
+    res.redirect('/admin');
+
+  } catch (error) {
+    console.error('Error deleting bot:', error);
+    res.status(500).send('Error deleting bot');
+  }
+};
+
 export default {
   assignCards,
   assignCardsForm,
   adminPanel,
-  createBot
+  createBot,
+  deleteBot
 }

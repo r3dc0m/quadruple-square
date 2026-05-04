@@ -7,7 +7,8 @@
             <tr>
                 <th>Player ID</th>
                 <th>Bot name</th>
-                <th>Action</th>
+                <th>Cards</th>
+                <th>Remove</th>
             </tr>
         </thead>
         <tbody>
@@ -22,13 +23,21 @@
                     <td>
                         <a href="/admin/assign-cards/<%= bot.player_id %>">Assign cards</a>
                     </td>
+                    <td>
+
+                        <form method="POST" action="/admin/deletebot/<%= bot.player_id %>">
+                            <button type="submit"
+                                onclick="return confirm('¿Borrar bot <%= bot.player_name %>?')">Delete</button>
+                        </form>
+
+                    </td>
                 </tr>
                 <% }) %>
                     <tr>
                         <td>?</td>
                         <td>
                             <form id="form-bot" method="POST" action="/admin/createbot">
-                                <input type="text" name="player_name" value="Enihcam Gnihsaw" />
+                                <input type="text" name="player_name" value="Noops Eno" />
                             </form>
                         </td>
                         <td>
@@ -49,7 +58,7 @@
                 <th>Player name</th>
                 <th>Email</th>
                 <th>Is admin</th>
-                <th>Action</th>
+                <th>Cards</th>
             </tr>
         </thead>
         <tbody>

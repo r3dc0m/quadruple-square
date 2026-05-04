@@ -9,5 +9,6 @@ router.get('/', AdminController.adminPanel);
 router.post('/assign-cards/', AdminController.assignCards);
 router.get('/assign-cards/:playerId', AdminController.assignCardsForm);
 router.post('/createbot', AdminController.createBot);
+router.post('/deletebot/:playerId', AdminController.deleteBot);
 
 export default router;

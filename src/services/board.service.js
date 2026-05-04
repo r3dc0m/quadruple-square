@@ -29,15 +29,7 @@ const getFullBoard = async (gameId) => {
     return board;
 };
 
-const getHand = async (gameId, playerId) => {
-    return GameSelectedCard.findAll({
-        where: { game_id: gameId, player_id: playerId },
-        include: [Card]
-    });
-};
-
 export default {
     initializeGameBoard,
-    getFullBoard,
-    getHand
+    getFullBoard
 };
